@@ -1,0 +1,28 @@
+{
+    "name": "$",
+    "title": "$",
+    "description": "$",
+    "keywords": [
+        "css3",
+        "linear-gradient",
+        "effect",
+        "jquery"
+    ],
+    "version": "1.0.0",
+    "author": {
+        "name": "vonKristoff",
+        "url": "http://atomicircus.org"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://opensource.org/licenses/MIT"
+        }
+    ],
+    "homepage": "http://bite-software.co.uk/$",
+    "docs": "https://github.com/vonKristoff/$",
+    "download": "https://github.com/vonKristoff/$/archive/master.zip",
+    "dependencies": {
+        "jquery": ">=1.5"
+    }
+}
