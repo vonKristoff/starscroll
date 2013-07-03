@@ -10,30 +10,39 @@
 */
 (function($) {
 
-$.fn.starscroll = function(fields,num,size,bit){ // 8bit mode 
+$.fn.starscroll = function(bit,fields,num,size,smooth,colour,mix,anim){ // 8bit mode 
 	
 	var el = $(this),
 		mobile = isMobile.any(),	
-		process = new Plugin(el,mobile,fields,num,size);	
+		process = new Plugin(el,mobile,bit,fields,num,size,smooth,colour,mix,anim);	
 	
 	window.addEventListener('scroll', function() { process.parallax(); }, false);		
-	
-	// autoscroll animation
-
+	if(anim && !mobile){
+		setInterval(function(){		
+			process.time += 5;
+			process.parallax();
+		},1000/40);
+	}
 	return this.el;	
 
 }
 
-var Plugin = function(me,mobile,levels,density,dimension){
+var Plugin = function(me,mobile,bit,levels,density,dimension,smooth,colour,mix,anim){
 
 	this.el = me;
-	this.levels = levels;
+	this.levels = (levels > 10)? 10 : levels;
 	this.layers = [];
-	this.dimension = dimension;
+	this.dimension = (dimension > 20)? 20 : dimension;
 	this.density = density;
+	this.colour = (!colour)? [255,255,255] : colour;
+	this.hue = (!mix)? false : mix;
+	this.bit = (!bit)? false : bit;
+	this.time = 0;
+	this.anim = anim;
+	this.smooth = (smooth > 5 || true)? 5 : smooth;
 
 	this.w = $(window).width();
-	this.h = $(window).height()/2;
+	this.h = $(window).height()/1.5;
 
 	if(!mobile) this.init();
 }
@@ -74,10 +83,11 @@ Plugin.prototype.createStars = function(){
 	for(var i=0;i<this.levels;i++){
 
 		var c = this.layers[i].canvas,
-			ctx = this.layers[i].context;
+			ctx = this.layers[i].context,
+			hsl = this.hsl(this.colour);
 
 		for(var j=0;j<this.density;j++){
-			this.drawStar(ctx,i)
+			this.drawStar(ctx,i,hsl)
 		}
 
 		images[i] = this.convertCanvasToImage(c);
@@ -86,28 +96,44 @@ Plugin.prototype.createStars = function(){
 	return images;
 
 }
-Plugin.prototype.drawStar = function(ctx,i){
+Plugin.prototype.drawStar = function(ctx,i,hsl){
 	
 	var z = this.dimension / (i*.075 +1),
 		radius = Math.random()*z,
         sx=0, sy=0,
-        flare = Math.random()*(radius*.9);
-    console.log(z);
+        flare = Math.random()*(radius*.9),
+        col = (this.hue)? this.colstep(hsl) : this.colour;
+
     sx = this.boundary('x',radius);
     sy = this.boundary('y',radius);
 
-    var grd = ctx.createRadialGradient(sx, sy, flare, sx, sy, radius);
+    var grd = ctx.createRadialGradient(sx, sy, flare, sx, sy, radius),
+    	alf = .7 + Math.random()*.3;
 
     grd.addColorStop(0, 'rgba(255,255,255,.9)');
-    grd.addColorStop(0.25, 'rgba(255,155,255,.8)');
-    grd.addColorStop(0.75, 'rgba(55,255,255,.8)');
+    if(col) grd.addColorStop(0.5, 'rgba('+col+',.8)');
     grd.addColorStop(1, 'rgba(255,255,255,0)');
     
     ctx.beginPath();
-    ctx.arc(sx,sy,radius,0,Math.PI*2,true);
-    ctx.fillStyle = grd;
+    
+    if(this.bit == 8 || false){
+    	
+    	ctx.fillRect(sx,sy,radius,radius);	
+    	ctx.fillStyle = 'rgba(255,255,255,'+alf+')';
+    }else{
+    	ctx.arc(sx,sy,radius,0,Math.PI*2,true);
+    	ctx.globalAlpha = .7 + Math.random()*.3;
+    	ctx.fillStyle = grd;
+    } 
     ctx.fill();
 }
+Plugin.prototype.colstep = function(hsl){
+
+	hsl[0] = hsl[0] - (~~(Math.random()*4)) + (~~(Math.random()*8));
+
+	return this.rgb(hsl);
+}
+
 Plugin.prototype.boundary = function(axis,rad){
 
 	var rlf = rad,
@@ -149,7 +175,7 @@ Plugin.prototype.applyImages = function(imgs){
 }
 Plugin.prototype.parallax = function(){
 
-	var pos = window.pageYOffset; 
+	var pos = window.pageYOffset - this.time; 
 
     for(var i=0;i<this.levels;i++){
 
@@ -164,6 +190,10 @@ Plugin.prototype.parallax = function(){
 Plugin.prototype.buildDOMels = function(DOM,i){
 	
 	this.el.append(DOM);
+	var scroll = '5s';
+	if(this.anim){
+		scroll = '0s'
+	}
 
 	this.el.css({
 		'position': 'fixed',
@@ -173,10 +203,9 @@ Plugin.prototype.buildDOMels = function(DOM,i){
 		'height':'100%'
 	})
 	DOM.css({
-		'-webkit-transition':'all 3s', // scroll type smooth 5s / responsive 0s  :: int (max 7)
+		'-webkit-transition':'all '+scroll, // scroll type smooth 5s / responsive 0s  :: int (max 7)
 		'position': 'fixed',
-		'z-index': i,
-		// 'opacity': i*1.25,
+		// 'opacity': 1.2/i,
 		'width':'100%',
 		'height':'100%',
 		'background-repeat': 'repeat',
