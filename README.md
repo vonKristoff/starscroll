@@ -1,38 +1,44 @@
-<h1>Static page template</h1>
-<p>Use for Bite-software plugin-dev deployment</p>
-<p>Insert $vars into setup.php for basic site generation</p>
-<p><i>dont forget to re-initialise git repro..</i></p>
+STARSCROLL
+==========
+
+<a href='http://bite-software.co.uk/starscroll'>Plugin Site</a>
+
 <h2>Features:</h2>
 <ul>
-	<li>Disqus comments</li>
-	<li>Code syntax highlighting</li>
-	<li>Google analytics</li>
-	<li>Custom fonts</li>
+	<li>8-bit or 16-bit mode! (how retro do you wanna go!?)</li>
+	<li>Animated or reactionary to scroll</li>
+	<li>Multiple layers of true parallax</li>
+	<li>Custom colours and complexities</li>
+	<li>Every websites dream</li>
 </ul>
-
-PLUGIN
-======
-
-<a href='http://bite-software.co.uk/offreg'>Plugin Site</a>
 
 BASIC USAGE:
 ```javascript
 $('.element').plugin(
-	source,
-	variables,
-	options
+	mode,
+	parallax-layers,
+	density,
+	dimension,
+	smoothness,
+	colour,
+	colour-varience,
+	animate
 );
 ```
 <h1>config options:</h1>
 
-| Option             | data type      | values               | Required | Nb.                								  | 
-| ------------------ |----------------|----------------------|----------|-----------------------------------------------------|
-| source  			 | string         | 'img/image.jpg'      | Yes      | any img type     									  |       
-| transparent        | boolean        | true / false         | Yes      |                									  |        
-| rotation 			 | float          | 0.0 -> 1.0  	     | Yes      | rotation offset strength      					  |        
-| offset 			 | float          | 0.0 -> 1.0   	     | No       | x/y axis offset strength    					      |        
+| Option             | data type      | values               | Required | bit mode | Nb.                			| 
+| ------------------ |----------------|----------------------|----------|----------|--------------------------------|
+| mode  			 | int | boolean  | 8 / 16, true / false | Yes      | n/a	   | Sets the graphics complexity	|       
+| parallax	         | int	          | max: 10		         | Yes      | both	   | num of parallax levels			|        
+| density 			 | int            | num of stars  	     | Yes      | both	   | 							    |       
+| dimension			 | int	          | max: 20   	   		 | Yes      | both 	   | size of stars |
+| smoothness		 | int	          | min: 0, max: 5 		 | No       | both 	   | scroll smoothness speed |
+| colour			 | rgb array	  | [255,255,255]   	 | No       | 16-bit   |  			 |
+| colour-varience	 | boolean        | true/false	   		 | No       | 16-bit   | subtle colour varience enabled |
+| animate			 | boolean        | true/false	   		 | No       | both     | auto scrolling starfield |       
 
 <h1>usage example</h1>
 ```javascript
-$('.container').offset(img,true,0.7);
+$('#starfield').starscroll(16,3,50,5);
 ```
