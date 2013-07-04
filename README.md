@@ -10,6 +10,7 @@ STARSCROLL
 	<li>Multiple layers of true parallax</li>
 	<li>Custom colours and complexities</li>
 	<li>Every websites dream</li>
+	<li>Forces static on mobile detection</li>
 </ul>
 
 BASIC USAGE:

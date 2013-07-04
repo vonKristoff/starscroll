@@ -41,7 +41,15 @@ var Plugin = function(me,mobile,bit,levels,density,dimension,smooth,colour,mix,a
 	this.anim = anim;
 	this.smooth = (smooth > 5 || true)? 5 : smooth;
 
-	this.w = $(window).width();
+	var width, ww = $(window).width();
+
+	if(this.anim){
+		width = (ww > 800)? 800 : ww;
+	}else{
+		width = ww;
+	}
+
+	this.w = width;
 	this.h = $(window).height()/1.5;
 
 	if(!mobile) this.init();
@@ -203,9 +211,11 @@ Plugin.prototype.buildDOMels = function(DOM,i){
 		'height':'100%'
 	})
 	DOM.css({
-		'-webkit-transition':'all '+scroll, // scroll type smooth 5s / responsive 0s  :: int (max 7)
+		'-webkit-transition':'all '+scroll+' cubic-bezier(0.230, 1.000, 0.320, 1.000)', 
+		'-moz-transition': 'all '+scroll+' cubic-bezier(0.230, 1.000, 0.320, 1.000)',
+    	'-ms-transition': 'all '+scroll+' cubic-bezier(0.230, 1.000, 0.320, 1.000)',
+     	'-o-transition': 'all '+scroll+' cubic-bezier(0.230, 1.000, 0.320, 1.000)',
 		'position': 'fixed',
-		// 'opacity': 1.2/i,
 		'width':'100%',
 		'height':'100%',
 		'background-repeat': 'repeat',
