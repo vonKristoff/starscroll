@@ -4,7 +4,7 @@
 *
 * @author Jean-Christophe Nicolas <mrjcnicolas@gmail.com>
 * @homepage http://bite-software.co.uk/starscroll/
-* @version 1.0.0
+* @version 0.1.1
 * @license MIT http://opensource.org/licenses/MIT
 * @date 02-07-2013
 */
