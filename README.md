@@ -1,6 +1,13 @@
 STARSCROLL
 ==========
 
+Create a div with purpose as your background .. activate plugin; animated or reactive as the user scrolls.
+The plugin automatically will fix the div so it works seemlessly.
+
+N.b the only css you might want to change is the z-index of your div. Also dont put anything in your starscroll div.
+
+<i>depends on jQuery 1.8.1+</i>
+
 <a href='http://bite-software.co.uk/starscroll'>Plugin Site</a>
 
 <h2>Features:</h2>

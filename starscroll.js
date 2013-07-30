@@ -43,12 +43,13 @@ var Plugin = function(me,mobile,bit,levels,density,dimension,smooth,colour,mix,a
 
 	var width, ww = $(window).width();
 
-	if(this.anim){
-		width = (ww > 800)? 800 : ww;
-	}else{
-		width = ww;
-	}
-
+	// if(this.anim){
+	// 	width = (ww > 800)? 800 : ww;
+	// }else{
+	// 	width = ww;
+	// }
+	width = (ww > 700)? 700 : ww;
+	
 	this.w = width;
 	this.h = $(window).height()/1.5;
 
@@ -211,10 +212,7 @@ Plugin.prototype.buildDOMels = function(DOM,i){
 		'height':'100%'
 	})
 	DOM.css({
-		'-webkit-transition':'all '+scroll+' cubic-bezier(0.230, 1.000, 0.320, 1.000)', 
-		'-moz-transition': 'all '+scroll+' cubic-bezier(0.230, 1.000, 0.320, 1.000)',
-    	'-ms-transition': 'all '+scroll+' cubic-bezier(0.230, 1.000, 0.320, 1.000)',
-     	'-o-transition': 'all '+scroll+' cubic-bezier(0.230, 1.000, 0.320, 1.000)',
+		'transition':'all '+scroll+' cubic-bezier(0.230, 1.000, 0.320, 1.000)', 
 		'position': 'fixed',
 		'width':'100%',
 		'height':'100%',
