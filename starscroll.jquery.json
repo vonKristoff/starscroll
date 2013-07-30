@@ -1,6 +1,6 @@
 {
-    "name": "starsrcoll",
-    "title": "Starsrcoll - A parallax scrolling starfield",
+    "name": "starscroll",
+    "title": "Starscroll - A parallax scrolling starfield",
     "description": "This jquery plugin adds a fullscreen starfield, generated in canvas, controlled by css to any div. The parallax responds when user scrolls (no matter how big your content), or when is set to animate. Why? because every website needs a starfield!",
     "keywords": [
         "css3",
