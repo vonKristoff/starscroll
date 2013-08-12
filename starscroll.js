@@ -41,17 +41,14 @@ var Plugin = function(me,mobile,bit,levels,density,dimension,smooth,colour,mix,a
 	this.anim = anim;
 	this.smooth = (smooth > 5 || true)? 5 : smooth;
 
-	var width, ww = $(window).width();
+	var width, ww = $(window).width(),
+		height, wh = $(window).width();
 
-	// if(this.anim){
-	// 	width = (ww > 800)? 800 : ww;
-	// }else{
-	// 	width = ww;
-	// }
 	width = (ww > 700)? 700 : ww;
-	
+	height = (wh > 600)? 650 : wh;
+
 	this.w = width;
-	this.h = $(window).height()/1.5;
+	this.h = height;
 
 	if(!mobile) this.init();
 }
@@ -125,8 +122,7 @@ Plugin.prototype.drawStar = function(ctx,i,hsl){
     
     ctx.beginPath();
     
-    if(this.bit == 8 || false){
-    	
+    if(this.bit == 8 || false){  	
     	ctx.fillRect(sx,sy,radius,radius);	
     	ctx.fillStyle = 'rgba(255,255,255,'+alf+')';
     }else{
@@ -317,7 +313,7 @@ var isMobile = {
         return navigator.userAgent.match(/BlackBerry/i);
     },
     iOS: function() {
-        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        return navigator.userAgent.match(/iPhone|iPod/i);
     },
     Opera: function() {
         return navigator.userAgent.match(/Opera Mini/i);
