@@ -2,19 +2,19 @@
 * Starscroll jQuery plug-in
 * Everyone needs a Starfield .. 
 *
-* @author Jean-Christophe Nicolas <mrjcnicolas@gmail.com>
+* @authors Jean-Christophe Nicolas <mrjcnicolas@gmail.com>, Nils Rekow <rekow.ch>
 * @homepage http://bite-software.co.uk/starscroll/
-* @version 0.1.3
+* @version 0.1.4
 * @license MIT http://opensource.org/licenses/MIT
-* @date 02-07-2013
+* @date 2017-07-27
 */
 (function($) {
 
-$.fn.starscroll = function(bit,fields,num,size,smooth,colour,mix,anim){ // 8bit mode 
+$.fn.starscroll = function(bit,fields,num,size,smooth,colour,mix,anim,scrollspeed){ // 8bit mode 
 	
 	var el = $(this),
 		mobile = isMobile.any(),	
-		process = new Plugin(el,mobile,bit,fields,num,size,smooth,colour,mix,anim);	
+		process = new Plugin(el,mobile,bit,fields,num,size,smooth,colour,mix,anim,scrollspeed);	
 	
 	window.addEventListener('scroll', function() { process.parallax(); }, false);		
 	if(anim && !mobile){
@@ -27,9 +27,8 @@ $.fn.starscroll = function(bit,fields,num,size,smooth,colour,mix,anim){ // 8bit 
 
 }
 
-var Plugin = function(me,mobile,bit,levels,density,dimension,smooth,colour,mix,anim){
-
-	this.el = me;
+var Plugin = function(me,mobile,bit,levels,density,dimension,smooth,colour,mix,anim,scrollspeed){
+ 	this.el = me;
 	this.levels = (levels > 10)? 10 : levels;
 	this.layers = [];
 	this.dimension = (dimension > 20)? 20 : dimension;
@@ -40,6 +39,7 @@ var Plugin = function(me,mobile,bit,levels,density,dimension,smooth,colour,mix,a
 	this.time = 0;
 	this.anim = anim;
 	this.smooth = (smooth > 5 || true)? 5 : smooth;
+	this.scrollspeed = (!scrollspeed)? 2 : scrollspeed;
 
 	var width, ww = $(window).width(),
 		height, wh = $(window).width();
@@ -185,7 +185,7 @@ Plugin.prototype.parallax = function(){
     for(var i=0;i<this.levels;i++){
 
     	var $el = this.layers[i].DOM,
-    		speed = -pos*((i+1)/2);
+    		speed = -pos*((i+1)/this.scrollspeed);
     	
     	$el.css({
             'background-position':'0 '+ speed +'px'
