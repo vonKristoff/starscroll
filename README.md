@@ -1,8 +1,8 @@
 STARSCROLL
 ==========
 
-Create a div with purpose as your background .. activate plugin; animated or reactive as the user scrolls.
-The plugin automatically will fix the div so it works seemlessly.
+Create a div with purpose as per your background .. activate plugin; animated or reactive as the user scrolls.
+The plugin automatically will fix the div so it will work seemlessly.
 
 N.b the only css you might want to change is the z-index of your div. Also dont put anything in your starscroll div.
 
