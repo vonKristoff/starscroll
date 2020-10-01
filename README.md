@@ -3,6 +3,7 @@ STARSCROLL
 
 Create a div with purpose as your background .. activate plugin; animated or reactive as the user scrolls.
 The plugin automatically will fix the div so it works seemlessly.
+An Amazing Website ,just Try it
 
 N.b the only css you might want to change is the z-index of your div. Also dont put anything in your starscroll div.
 
@@ -17,7 +18,7 @@ N.b the only css you might want to change is the z-index of your div. Also dont 
 	<li>Multiple layers of true parallax</li>
 	<li>Custom colours and complexities</li>
 	<li>Every websites dream</li>
-	<li>Forces static on mobile detection</li>
+	<li>Forces static on  detection</li>
 </ul>
 
 BASIC USAGE:
