@@ -49,6 +49,19 @@ $('.element').plugin(
 | scrollspeed		 | int            | min: 0, default: 2   | No       | both     | scroll speed					|
 
 <h1>usage example</h1>
+Example:
+<head>
+    <title>Starfield</title>
+    <style>
+        #container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+    </style>
+</head> 
 ```javascript
 $('#starfield').starscroll(16,3,50,5);
 ```
