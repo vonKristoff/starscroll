@@ -1,3 +1,4 @@
+one of the best way
 /**
 * Starscroll jQuery plug-in
 * Everyone needs a Starfield .. 
