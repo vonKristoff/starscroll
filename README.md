@@ -1,4 +1,4 @@
-STARSCROLL
+STARSCROLL an amazing project
 ==========
 
 Create a div with purpose as per your background .. activate plugin; animated or reactive as the user scrolls.
